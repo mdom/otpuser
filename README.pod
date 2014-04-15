@@ -1,0 +1,64 @@
+=pod
+
+=head1 NAME
+
+otpuser - print otp qrcodes for OATH Toolkit
+
+=head1 SYNOPSIS
+
+  otpuser [--type png|eps|ansi|ansi256] USER...
+
+=head1 DESCRIPTION
+
+Prints qrcodes for existing and new OATH Toolkit users. If the user
+already exists in I</etc/users.oath>, the qrcode will just be printed to
+stdout. Otherwise otpuser generate a new secret by reading I</dev/random>,
+adds a line to I</etc/users.oath> and then prints the new qrcode.
+
+=head1 OPTIONS
+
+=over 4
+
+=item --type png|eps|ansi|ansi256
+
+If type is ansi or ansi256 (default) print the qrcode to stdout. In any
+other case save the qrcode as file. The filename will be constructed
+from the username and the type.
+
+=back
+
+=head1 INSTALLATION
+
+Just copy the script somewhere in your path and install its only
+dependencies qrencode and Convert::Base32. In Debian you just need
+the following:
+
+  apt-get install libconvert-base32-perl qrencode
+
+=head1 LIMITATIONS
+
+Currently the format for new users is hardcoded in the script:
+
+  HOTP/T30/6 $USER + $SECRET
+
+=head1 SEE ALSO
+
+L<OATH Toolkit|http://www.nongnu.org/oath-toolkit>
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright 2014 Mario Domgoergen L<E<lt>mario@domgoergen.comE<gt>>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
